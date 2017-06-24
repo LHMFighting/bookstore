@@ -1,0 +1,27 @@
+extends ../adminlayout
+
+block content
+    table.table.table-hover.table-bordered
+        thread
+            tr
+                th 电影名字
+                th 作者
+                th 出版社
+                th 价格
+                th 录入时间
+                th 查看
+                th 更新
+                th 删除
+        tbody
+            each item in books
+                tr(class="item-id-#{item._id}")
+                    td #{item.title}
+                    td #{item.author}
+                    td #{item.publisher}
+                    td #{item.price}
+                    td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
+                    td: a(target="_blank",href="/book/#{item._id}") 查看
+                    td: a(target="_blank",href="/admin/book/update/#{item._id}") 修改
+                    td 
+                        button.btn.btn-danger.del(type="button",data-id="#{item._id}") 删除                       
+    script(src='/js/admin.js')

@@ -1,0 +1,48 @@
+extends ../layout
+
+block content
+    .container
+        .row 
+            ul.nav.nav-pills
+                li(role="presentation")    
+                    a(href="/") 全部
+                each cat in  categories
+                    li(role="presentation")    
+                        a(href="/results?cat=#{cat._id}&p=0")= cat.name 
+            each cat in  categories
+                if cat.books && cat.books.length > 0
+                    each item in cat.books
+                        .col-md-2
+                            .thumbnail
+                                a(href="/book/#{item._id}")
+                                    img(src="#{item.poster}",alt="#{item.title}")
+                                    .caption
+                                        h4 #{item.title} 
+                                        h5 #{item.price} 
+                                        .row
+                                            .col-md-6
+                                                .carts
+                                                    form.cartForm(method="POST", action="/cart/save")
+                                                        input(type="hidden", name="cart[book]", value="#{item._id}")
+                                                        input(type="hidden", name="cart[user]", value="#{user._id}")
+                                                        button.btn.btn-primary(type='submit') 添加
+                                            .col-md-6
+                                                p: a.cartBuy.btn.btn-primary(href="/book/#{item._id}",role="button") 购买
+
+            //- each cat in  categories
+            //-     .panel.panel-primary
+            //-         .panel-default
+            //-             .panel-heading
+            //-                 h3 
+            //-                     a(href='/results?cat=#{cat._id}&p=0') #{cat.name}
+            //-         .panel-body
+            //-             if cat.books && cat.books.length > 0
+            //-                 each item in cat.books
+            //-                     .col-md-2
+            //-                         .thumbnail
+            //-                             a(href="/book/#{item._id}")
+            //-                                 img(src="#{item.poster}",alt="#{item.title}")
+            //-                                 .caption
+            //-                                     h3 #{title}
+            //-                                     p: a.btn.btn-primary(href="/book/#{item._id}",role="button") 观看预告片
+    script(src="/js/cart.js")

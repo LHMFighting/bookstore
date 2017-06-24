@@ -1,0 +1,30 @@
+doctype
+html
+    head
+        meta(charset="utf-8")
+        title #{title}
+        include ./includes/head
+        style.
+            body {
+                margin-top: 62px;
+            }
+            .thumbnail img {
+                width: 155px;
+                height: 200px !important;
+            }
+    body
+        include ./includes/adminheader
+        .container-fluid
+            .row
+                .col-md-2.sidebar
+                    ul.nav.nav-sidebar
+                        li.active
+                            a(href="/admin/book/list") 书籍管理
+                        li
+                            a(href="/admin/book/new") 书籍增加
+                        li
+                            a(href="/admin/category/list") 分类管理
+                        li
+                            a(href="/admin/user/list") 用户管理
+                .col-md-10
+                    block content

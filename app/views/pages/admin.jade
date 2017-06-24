@@ -1,0 +1,65 @@
+extends ../adminlayout
+
+block content
+    .container
+        .row
+            form.form-horizontal(method="post",action="/admin/book/new")
+                .form-group
+                    label.col-sm-1.control-label 豆瓣同步
+                    .col-sm-8
+                        input#douban.form-control(type="text") 
+                if book._id
+                    input(type="hidden",name="book[_id]",value="#{book._id}")
+                .form-group
+                    label.col-sm-1.control-label(for="inputCategory") 分类
+                    .col-sm-8
+                        input#inputCategory.form-control(type="text",name="book[categoryName]",value=book.categoryName)
+                .form-group
+                    label.col-sm-1.control-label 分类选择
+                    each cat in categories
+                        label.radio-inline
+                            if book._id
+                                input(type="radio",name="book[category]",value=cat._id,checked=cat._id.toString()==book.category.toString()) 
+                            else
+                                input(type="radio",name="book[category]",value=cat._id) 
+                            | #{cat.name}
+                .form-group
+                    label.col-sm-1.control-label(for="inputTitle") 图书名字
+                    .col-sm-8
+                        input#inputTitle.form-control(type="text",name="book[title]",value=book.title)
+                .form-group
+                    label.col-sm-1.control-label(for="inputAuthor") 作者
+                    .col-sm-8
+                        input#inputAuthor.form-control(type="text",name="book[author]",value=book.author)
+                .form-group
+                    label.col-sm-1.control-label(for="inputPubdate") 出版日期
+                    .col-sm-8
+                        input#inputPubdate.form-control(type="text",name="book[pubdate]",value=book.pubdate)
+                .form-group
+                    label.col-sm-1.control-label(for="inputPublisher") 出版社
+                    .col-sm-8
+                        input#inputPublisher.form-control(type="text",name="book[publisher]",value=book.publisher)
+                .form-group
+                    label.col-sm-1.control-label(for="inputPages") 页数
+                    .col-sm-8
+                        input#inputPages.form-control(type="text",name="book[pages]",value=book.pages)
+                .form-group
+                    label.col-sm-1.control-label(for="inputPoster") 图片
+                    .col-sm-8
+                        input#inputPoster.form-control(type="text",name="book[poster]",value=book.poster)
+                .form-group
+                    label.col-sm-1.control-label(for="inputAuthorIntro") 作者简介
+                    .col-sm-8
+                        textarea#inputAuthorIntro.form-control(type="text",name="book[author_intro]",value=book.author_intro)
+                .form-group
+                    label.col-sm-1.control-label(for="inputPrice") 价格
+                    .col-sm-8
+                        input#inputPrice.form-control(type="text",name="book[price]",value=book.price)
+                .form-group
+                    label.col-sm-1.control-label(for="inputSummary") 作品简介
+                    .col-sm-8
+                        textarea#inputSummary.form-control(type="text",name="book[summary]")=book.summary
+                .form-group
+                    .col-sm-offset-2.col-sm-6
+                    button.btn.btn-default(type="submit") 录入
+    script(src="/js/admin.js")
