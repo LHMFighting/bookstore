@@ -3,11 +3,13 @@ extends ../layout
 block content
     h3(style="margin-left: 105px;") 购物车
     .container
-       .row.bg-success
-        h5.col-md-3 商品
-        h5.col-md-3 单价
-        h5.col-md-3 价格
-        h5.col-md-3 删除
+        .row.bg-success
+            h5.col-md-3 商品
+            h5.col-md-3 单价
+            h5.col-md-3 价格
+            h5.col-md-3 删除
+        each item in bookList
+            div #{item}
             
     //-    a.carts.btn.btn-success(href="#",role="button",style="float: right;") 购买
     //- script(src="/js/showcart.js")

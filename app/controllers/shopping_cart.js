@@ -26,6 +26,7 @@ exports.save = function(req, res) {
     var id = req.body.book._id
     var bookObj = req.body.book
     var _book
+    console.log('object');
     console.log(id);
     console.log(bookObj);
     if(id)  {
